@@ -1,10 +1,13 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
+from flask_cors import CORS
 import json
+import os
 
 # ==================== API CONTROLE REGISTROS DE PONTO ==============================
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 # ==================== LISTA DE VALORES ======================
@@ -93,4 +96,5 @@ api.add_resource(TodosRegistros, '/registros/')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
